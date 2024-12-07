@@ -9,7 +9,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
+  "description": "Basic setup for Webpack",
   "devDependencies": {
     "webpack": "^5.97.1",
     "webpack-cli": "^5.1.4"
