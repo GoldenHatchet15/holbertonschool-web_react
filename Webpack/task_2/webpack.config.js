@@ -6,7 +6,8 @@ module.exports = {
     output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'public'),
-        publicPath: 'public/',
+        publicPath: '/',
+        clean: true,  // This ensures the output directory is cleaned between builds
     },
     module: {
         rules: [
@@ -15,22 +16,17 @@ module.exports = {
                 use: ['style-loader', 'css-loader']
             },
             {
-                test: /\.(png|svg|jpg|jpeg|gif)$/i,
-                use: [
-                    {
-                        loader: 'file-loader',
-                        options: {
-                            outputPath: 'assets/',
-                            name: '[name].[contenthash].[ext]',
-                        },
-                    },
-                ],
-            },
+                test: /\.(png|jpg|jpeg|gif|svg)$/i,
+                type: 'asset/resource',
+                generator: {
+                    filename: 'assets/[name][ext]'
+                }
+            }
         ]
     },
     performance: {
         hints: 'warning',
-        maxAssetSize: 512000, // Adjust size as needed
+        maxAssetSize: 512000,
         maxEntrypointSize: 512000,
     }
 };
