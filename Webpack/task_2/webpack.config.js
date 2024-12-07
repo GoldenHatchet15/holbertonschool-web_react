@@ -1,6 +1,5 @@
-const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-
+const path = require('path');
 
 module.exports = {
     mode: 'production',
@@ -11,10 +10,9 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            title: 'Holberton School webpack setup',
-            filename: 'index.html', // This specifies the name of the HTML file to generate.
-            template: 'src/index.html', // This should point to a template HTML file in your src folder.
-            inject: true // This option injects the bundle.js into the file automatically.
+            filename: 'index.html',
+            template: 'src/index.html',
+            inject: true
         })
     ],
     module: {
@@ -27,14 +25,14 @@ module.exports = {
                 test: /\.(png|jpg|jpeg|gif|svg)$/i,
                 type: 'asset/resource',
                 generator: {
-                    filename: 'assets/[name][ext]'
+                    filename: 'assets/[name][contenthash].[ext]'
                 }
             }
         ]
     },
     performance: {
-        hints: 'warning',
-        maxAssetSize: 512000,
-        maxEntrypointSize: 512000,
+        maxAssetSize: 1000000,  // Example: 1MB - adjust this based on your asset sizes
+        maxEntrypointSize: 1000000,
+        hints: 'warning'
     }
 };
