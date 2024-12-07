@@ -1,4 +1,6 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 
 module.exports = {
     mode: 'production',
@@ -6,9 +8,15 @@ module.exports = {
     output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'public'),
-        publicPath: '/',
-        clean: true,  // This ensures the output directory is cleaned between builds
     },
+    plugins: [
+        new HtmlWebpackPlugin({
+            title: 'Holberton School webpack setup',
+            filename: 'index.html', // This specifies the name of the HTML file to generate.
+            template: 'src/index.html', // This should point to a template HTML file in your src folder.
+            inject: true // This option injects the bundle.js into the file automatically.
+        })
+    ],
     module: {
         rules: [
             {
