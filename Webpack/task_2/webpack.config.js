@@ -6,6 +6,7 @@ module.exports = {
     output: {
         filename: 'bundle.js',
         path: path.resolve(__dirname, 'public'),
+        publicPath: 'public/',
     },
     module: {
         rules: [
@@ -15,16 +16,21 @@ module.exports = {
             },
             {
                 test: /\.(png|svg|jpg|jpeg|gif)$/i,
-                type: 'asset/resource',
-                generator: {
-                    filename: 'assets/[hash][ext][query]'
-                }
-            }
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            outputPath: 'assets/',
+                            name: '[name].[contenthash].[ext]',
+                        },
+                    },
+                ],
+            },
         ]
     },
     performance: {
-        hints: 'warning', // This will display warnings for large assets
-        maxAssetSize: 512000, // Adjust size in bytes (this is 500 KB)
+        hints: 'warning',
+        maxAssetSize: 512000, // Adjust size as needed
         maxEntrypointSize: 512000,
     }
 };
