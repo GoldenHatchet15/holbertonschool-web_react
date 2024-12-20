@@ -1,5 +1,4 @@
 // task_1/dashboard/src/utils.js
-
 // Function to get the current year
 export function getCurrentYear() {
     return new Date().getFullYear();
@@ -13,4 +12,3 @@ export function getCurrentYear() {
       return 'Holberton School main dashboard';
     }
   }
-  
