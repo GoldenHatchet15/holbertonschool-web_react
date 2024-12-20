@@ -1,0 +1,8 @@
+/* task_1/dashboard/src/Notifications.css */
+.notifications {
+    color: rgb(0, 0, 0); /* Example style */
+    border: 1px dotted rgb(255, 0, 0); /* Example style */
+    padding: 10px; /* Example style */
+    margin-top: 20px; /* Example style */
+  }
+  
