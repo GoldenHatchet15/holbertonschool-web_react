@@ -1,8 +1,23 @@
-/* task_1/dashboard/src/Notifications.css */
-.notifications {
-    color: rgb(0, 0, 0); /* Example style */
-    border: 1px dotted rgb(255, 0, 0); /* Example style */
-    padding: 10px; /* Example style */
-    margin-top: 20px; /* Example style */
-  }
-  
+.Notifications {
+  position: relative;
+  border: 1px dashed red;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+.Notifications button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.Notifications ul {
+  list-style: none;
+}
+
+.Notifications li[data-priority='urgent'] {
+  color: red;
+}

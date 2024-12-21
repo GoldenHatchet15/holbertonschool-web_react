@@ -15,7 +15,7 @@ export default [
         ecmaVersion: 'latest',
         ecmaFeatures: { jsx: true },
         sourceType: 'module',
-      },
+      }
     },
     settings: { react: { version: '18.3' } },
     plugins: {
@@ -33,6 +33,10 @@ export default [
         'warn',
         { allowConstantExport: true },
       ],
+      },
+      globals: {
+        ...globals.browser,
+        jest: true,  // This tells ESLint that Jest globals should be treated as defined
+      }
     },
-  },
 ]
