@@ -17,11 +17,11 @@ function App() {
         <p>Login to access the full dashboard</p>
         <div>
           <label htmlFor="email">Email:</label>
-          <input type="email" id="email" name="email" />
+          <input data-testid="input-element" type="email" id="email" name="email" />
         </div>
         <div>
           <label htmlFor="password">Password:</label>
-          <input type="password" id="password" name="password" />
+          <input data-testid="input-element" type="password" id="password" name="password" />
         </div>
         <button>OK</button>
       </div>
