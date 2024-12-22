@@ -1,6 +1,6 @@
 import React from 'react';
 import { getLatestNotification } from './utils';
-import closeIcon from './assets/close-icon.png'; // ensure the path is correct
+import closeIcon from './assets/close-button.png'; // ensure the path is correct
 
 function Notifications() {
   const closeNotification = () => {

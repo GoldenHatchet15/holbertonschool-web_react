@@ -1,15 +1,19 @@
-// task_1/dashboard/src/utils.js
+// utils.js
 
-// Function to get the current year
+// Existing exports
 export function getCurrentYear() {
-    return new Date().getFullYear();
-  }
-  
-  // Function to get footer copy based on whether it's the index page or not
-  export function getFooterCopy(isIndex) {
-    if (isIndex) {
+  return new Date().getFullYear();
+}
+
+export function getFooterCopy(isIndex) {
+  if (isIndex) {
       return 'Holberton School';
-    } else {
+  } else {
       return 'Holberton School main dashboard';
-    }
   }
+}
+
+// Add this new function
+export function getLatestNotification() {
+  return '<strong>Urgent requirement</strong> - complete by EOD';
+}
