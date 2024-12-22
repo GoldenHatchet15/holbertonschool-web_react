@@ -1,26 +1,19 @@
 import React from 'react';
 import { getLatestNotification } from './utils';
-import closeIcon from './assets/close-button.png'; // ensure the path is correct
+import './Notifications.css';
+import closeIcon from './assets/close-button.png'; // Make sure the path is correct
 
 function Notifications() {
-  const closeNotification = () => {
-    console.log('Close button has been clicked');
-  };
-
   return (
     <div className="Notifications">
-      <button
-        style={{ float: 'right' }}
-        aria-label="Close"
-        onClick={closeNotification}
-      >
-        <img src={closeIcon} alt="Close" />
+      <button className="close-button" aria-label="Close" onClick={() => console.log('Close button has been clicked')}>
+        <img src={closeIcon} alt="close"/>
       </button>
       <p>Here is the list of notifications</p>
       <ul>
-        <li data-priority="default">New course available</li>
-        <li data-priority="urgent">New resume available</li>
-        <li dangerouslySetInnerHTML={{ __html: getLatestNotification() }}></li>
+        <li className="item default-priority">New course available</li>
+        <li className="item urgent-priority">New resume available</li>
+        <li className="item urgent-priority" dangerouslySetInnerHTML={{ __html: getLatestNotification() }}></li>
       </ul>
     </div>
   );
