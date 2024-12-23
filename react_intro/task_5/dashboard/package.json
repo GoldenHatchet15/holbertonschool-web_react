@@ -5,6 +5,8 @@
   "type": "module",
   "homepage": "https://GoldenHatchet15.github.io/holbertonschool-web_react",
   "scripts": {
+    "start": "vite",
+    "serve": "vite preview",
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
