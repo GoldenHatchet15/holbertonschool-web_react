@@ -1,0 +1,28 @@
+/* General App styling */
+.App {
+  text-align: left;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Ensures footer sticks to bottom */
+  font-family: Arial, sans-serif; /* or any other font you prefer */
+  color: #e1003c;
+}
+
+/* Header styling */
+
+
+/* Body styling */
+.App-body {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: left; /* Ensures content in the body is centered */
+  align-items: left; /* Aligns content to the left */
+}
+
+.App-body p {
+  color: #000000;
+}
+
+/* Footer styling */
