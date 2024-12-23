@@ -1,8 +1,16 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import Footer from './Footer';
+import { getFooterCopy, getCurrentYear } from '../utils/utils';
 
-test('renders Footer component', () => {
+jest.mock('../utils/utils', () => ({
+  getFooterCopy: jest.fn(() => 'Holberton School'),
+  getCurrentYear: jest.fn(() => 2024), // Mock the year
+}));
+
+test('renders the correct copyright text', () => {
   const { getByText } = render(<Footer />);
-  expect(getByText('© 2024 Your Company')).toBeInTheDocument();
+  const footerText = `Copyright 2024 Holberton School`;
+
+  expect(getByText(footerText)).toBeInTheDocument();
 });
