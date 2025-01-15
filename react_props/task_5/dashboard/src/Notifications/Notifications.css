@@ -1,0 +1,30 @@
+.Notifications {
+    border: thin dotted #e0344a;
+    padding: 20px;
+  }
+
+.container {
+  position: absolute;
+  padding-left: 80%;
+  padding-right: 10px;
+  padding-top: 10px;
+}
+
+#not{
+  position: absolute;
+  padding-left: 90%;
+  padding-top: 20px;
+
+}
+.listNot{
+  position: absolute;
+  padding-left: 90%;
+  padding-top: 20px;
+
+}
+li[data-priority='default'] {
+  color: blue;
+}
+li[data-priority='urgent'] {
+  color: red;
+}

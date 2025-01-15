@@ -1,0 +1,12 @@
+.App-header {
+    display: flex;
+    color: #df3148;
+    align-items: center;
+    border-bottom: thick solid #df3148;
+  }
+  
+  .App-header h1 {
+    font-size: 4rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+  }

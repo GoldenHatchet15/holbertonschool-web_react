@@ -1,0 +1,29 @@
+#CourseList {
+    margin: 50px;
+    border-collapse: collapse;
+    border-bottom: 2px solid rgb(222, 222, 222);;
+    width: 80%;
+
+
+}
+
+
+
+.title{
+    border-top: 2px solid rgb(222, 222, 222);
+    border-bottom: 2px solid rgb(222, 222, 222);
+}
+
+th,  td{
+
+    border-left:  2px solid rgb(222, 222, 222);
+    border-right:  2px solid rgb(222, 222, 222);
+   
+    text-align: left;
+}
+
+th[colSpan='2']{
+    text-align: center;
+    border-left: 0px solid rgb(221, 221, 221);
+}
+

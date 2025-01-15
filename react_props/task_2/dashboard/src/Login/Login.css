@@ -1,0 +1,13 @@
+.App-body {
+  font-size: 1.5rem;
+  padding: 25px;
+}
+
+
+.App-body .form label {
+  padding: 5px;
+  
+}
+.App-body .form input {
+  padding: 5px;
+}
