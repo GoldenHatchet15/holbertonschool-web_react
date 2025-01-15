@@ -1,32 +1,42 @@
-import React from 'react';
+import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
 import './App.css';
 import Header from '../Header/Header.js';
-import Footer from '../Footer/Footer.js'
-import Login from '../Login/Login';
-import Notifications from '../Notifications/Notifications';
-import CourseList from '../CourseList/CourseList.js'
-import PropTypes from 'prop-types';
+import Login from '../Login/Login.js';
+import Footer from '../Footer/Footer.js';
+import Notifications from '../Notifications/Notifications.js';
+import CourseList from '../CourseList/CourseList';
 
-App.propTypes = {
-  isLoggedIn: PropTypes.bool
-}
+class App extends Component {
+  render() {
+    let {
+      isLoggedIn,
+    } = this.props;
+  
+    return (
+      <Fragment>
+        <div className="App">
+          <div className="upperside">
+            <Notifications />
+            <Header />
+          </div>
+          {
+            isLoggedIn === false &&
+            <Login />
+          }
+          {
+            isLoggedIn === true &&
+            <CourseList />
+          }
+          <Footer />
+        </div>
+      </Fragment>
+    );  
+  };
+};
+
 App.defaultProps = {
-  isLoggedIn:false
-}
-
-
-function App({ isLoggedIn }) {
-  return (
-    <React.Fragment>
-      <div className="App">
-    <Notifications/>
-    </div>
-        <Header/>
-      {isLoggedIn && <CourseList/>}
-      {!isLoggedIn && <Login/>}
-      <Footer/>
-    </React.Fragment>
-  );
-}
+  isLoggedIn: false,
+};
 
 export default App;

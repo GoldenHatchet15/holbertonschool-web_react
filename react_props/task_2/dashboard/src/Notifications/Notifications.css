@@ -1,11 +1,14 @@
 .Notifications {
-    border: thin dotted #e0344a;
-    padding: 16px;
-  }
-
-li[data-priority='default'] {
-  color: blue;
+	border: 2px dotted var(--holberton-red);
+	padding: 6px 12px;
+	position: relative;
+	margin-top: 12px;
 }
-li[data-priority='urgent'] {
-  color: red;
+
+li[data-priority-type="default"] {
+	color: blue;
+}
+
+li[data-priority-type="urgent"] {
+	color: red;
 }

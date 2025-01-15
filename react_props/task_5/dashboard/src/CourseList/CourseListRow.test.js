@@ -1,24 +1,49 @@
 import React from 'react';
-import CourseListRow from "./CourseListRow.js"
-import { shallow, configure } from 'enzyme';
+import { expect } from 'chai';
 import Adapter from 'enzyme-adapter-react-16';
+import { shallow, configure } from 'enzyme';
+import CourseListRow from './CourseListRow';
+
 configure({adapter: new Adapter()});
 
+describe("Testing the <CourseListRow /> Component", () => {
 
-it('renders one cell with colspan = 2', () => {
-    let textSecondCell = null;
-    const wrapper = shallow(<CourseListRow  isHeader textFirstCell= "textFirstCell" {...{textSecondCell}}  />);
-    expect(wrapper.html()).toBe('<tr><th colSpan="2">textFirstCell</th></tr>')
+	it("Test if it renders one cell with colSpan=2 when textSecondCell doesn't exist and isHeader is true", () => {
+		
+		let props = {
+			isHeader: true,
+			textFirstCell: 'dumbstring',
+		};
+
+		let component = shallow(<CourseListRow {...props} />);
+
+		expect(component.contains(<tr><th colSpan={2}>{props.textFirstCell}</th></tr>)).to.equal(true);
+	});
+
+	it("Test if it renders 2 cells when textSecondCell exists and isHeader is true", () => {
+		
+		let props = {
+			isHeader: true,
+			textFirstCell: 'dumbstring',
+			textSecondCell: 'dumbstring',
+		};
+
+		let component = shallow(<CourseListRow {...props} />);
+
+		expect(component.contains(<tr><th>{props.textFirstCell}</th><th>{props.textSecondCell}</th></tr>)).to.equal(true);
+	});
+
+	it("Test if it renders 2 <td> within a <tr> element when isHeader is false", () => {
+		
+		let props = {
+			isHeader: false,
+			textFirstCell: 'dumbstring',
+			textSecondCell: 'dumbstring',
+		};
+
+		let component = shallow(<CourseListRow {...props} />);
+
+		expect(component.contains(<tr><td>{props.textFirstCell}</td><td>{props.textSecondCell}</td></tr>)).to.equal(true);
+	});
+
 });
-
-it('returns two th elements containing textFirstCell and textSecondCell', () => {
-    let textSecondCell = 'textSecondCell';
-    const wrapper = shallow(<CourseListRow  isHeader textFirstCell= "textFirstCell" {...{textSecondCell}}  />);
-    expect(wrapper.html()).toBe('<tr><th>textFirstCell</th><th>textSecondCell</th></tr>')
-});
-
-it("returns two td elements containing textFirstCell and textSecondCell",() =>{
-    const wrapper = shallow(<CourseListRow textFirstCell = "textFirstCell" textSecondCell = "textSecondCell"/>);
-    expect(wrapper.html()).toBe("<tr><td>textFirstCell</td><td>textSecondCell</td></tr>")
-
-})

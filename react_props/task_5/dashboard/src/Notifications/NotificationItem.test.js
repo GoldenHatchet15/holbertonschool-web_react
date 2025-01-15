@@ -1,21 +1,40 @@
 import React from 'react';
-import NotificationItem from "./NotificationItem.js"
-import { shallow, configure } from 'enzyme';
+import { expect } from 'chai';
+import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+import NotificationItem from './NotificationItem';
+
 configure({adapter: new Adapter()});
 
+describe("Testing <NotificationItem /> Component", () => {
 
-it(" rendering of the component", () => {
-    const wrapper = shallow(<NotificationItem type="default" value="test"/>)
-    expect(wrapper.exists()).toEqual(true);
-})
+	let wrapper;
 
-it("renders the correct Props ", () => {
-    const wrapper = shallow(<NotificationItem type="default" value="test"/>)
-    expect(wrapper.props()).toEqual({"children": "test", "data-priority": "default"})
-})
+	it("<NotificationItem /> is rendered without crashing", () => {
+		wrapper = shallow(<NotificationItem shouldRender />);
+		expect(wrapper).to.not.be.an("undefined");
+	});
 
-it("renders the correct html", () => {
-    const wrapper = shallow(< NotificationItem type="urgent" html={{ __html: '<u>test</u>' }} />)
-    expect(wrapper.html()).toEqual('<li data-priority=\"urgent\"><u>test</u></li>')
-})
+	it("<NotificationItem /> render the correct HTML, by passing type and value props", () => {
+
+		let props = {
+			type: "default",
+			value: "New resume",
+			html: undefined
+		}
+		
+		let component = shallow(<NotificationItem {...props} />);
+
+		expect(component.contains(<li data-priority-type={props.type} dangerouslySetInnerHTML={undefined}>New resume</li>)).to.equal(true);
+	});
+
+	it("<NotificationItem /> render the correct HTML, by passing dummy html props", () => {
+		let props = {
+			type: "urgent",
+			html: { __html: "<p>test</p>"},
+		}
+		let component = shallow(<NotificationItem {...props} />);
+		expect(component.contains(<li data-priority-type={props.type} dangerouslySetInnerHTML={props.html} />)).to.equal(true);
+	});
+
+});

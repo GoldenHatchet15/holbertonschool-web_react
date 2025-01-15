@@ -1,20 +1,20 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import './App.css';
 import Header from '../Header/Header.js';
-import Footer from '../Footer/Footer.js'
-import Login from '../Login/Login';
-import Notifications from '../Notifications/Notifications';
+import Login from '../Login/Login.js';
+import Footer from '../Footer/Footer.js';
+import Notifications from '../Notifications/Notifications.js';
 
 function App() {
   return (
-    <React.Fragment>
+    <Fragment>
+      <Notifications />
       <div className="App">
-    <Notifications/>
-    </div>
-        <Header/>
-      <Login/>
-      <Footer/>
-    </React.Fragment>
+        <Header />
+        <Login />
+        <Footer />
+      </div>
+    </Fragment>
   );
 }
 

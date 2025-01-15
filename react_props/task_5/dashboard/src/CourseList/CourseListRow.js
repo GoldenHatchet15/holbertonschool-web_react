@@ -1,32 +1,61 @@
-import React from 'react'
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+class CourseListRow extends Component {
+	render() {
+
+		let {
+			isHeader,
+			textFirstCell,
+			textSecondCell,
+		} = this.props;
+
+		if (isHeader === true && textSecondCell == null) {
+			return (
+				<tr>
+					<th colSpan={2}>
+						{textFirstCell}
+					</th>
+				</tr>
+			);
+		} else if (isHeader === true && textSecondCell != null) {
+			return (
+				<tr>
+					<th>
+						{textFirstCell}
+					</th>
+					<th>
+						{textSecondCell}
+					</th>
+				</tr>
+			);
+		} else if (isHeader === false) {
+			return (
+				<tr>
+					<td>
+						{textFirstCell}
+					</td>
+					<td>
+						{textSecondCell}
+					</td>
+				</tr>
+			);
+		}
+	}
+};
+
 CourseListRow.propTypes = {
-    isHeader: PropTypes.bool,
-    textFirstCell: PropTypes.string.isRequired,
-    textSecondCell: PropTypes.string
-  }
+	isHeader: PropTypes.bool,
+	textFirstCell: PropTypes.string.isRequired,
+	textSecondCell: PropTypes.oneOfType([
+		PropTypes.string,
+		PropTypes.number,
+	]),
+};
+
 CourseListRow.defaultProps = {
-    isHeader: false,
-    textSecondCell: null
-}
+	isHeader: false,
+	textSecondCell: null,
+};
 
-function CourseListRow({isHeader = false, textFirstCell , textSecondCell = null}){
-    let ret = "";
-    if (isHeader && textSecondCell  === null){
-        ret = <tr><th colSpan = "2">{textFirstCell}</th></tr>
-        return ret
-
-    }
-    if(isHeader && !!textSecondCell ){
-        ret = <tr><th>{textFirstCell}</th><th>{textSecondCell}</th></tr>
-        return ret
-    }
-    else{
-        ret =<tr><td>{textFirstCell}</td><td>{textSecondCell}</td></tr>
-        return ret
-    }
-}
-
-
-export default CourseListRow
+export default CourseListRow;

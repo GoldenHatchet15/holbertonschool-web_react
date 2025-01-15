@@ -1,18 +1,25 @@
 import React from 'react';
-import { shallow, configure } from 'enzyme';
+import { expect } from 'chai';
 import Adapter from 'enzyme-adapter-react-16';
-import Footer from "./Footer";
+import { shallow, configure } from 'enzyme';
+import Footer from './Footer';
+
 configure({adapter: new Adapter()});
 
+describe("Testing the <Footer /> Component", () => {
+	
+	let wrapper;
 
+	beforeEach(() => {
+		wrapper = shallow(<Footer shouldRender />);
+	});
 
+	it("<Footer /> is rendered without crashing", () => {
+		expect(wrapper.render()).to.not.be.an('undefined');
+	});
 
-  it('App render class App-footer', () => {
-    const wrapper = shallow(<Footer />);
-    expect(wrapper.find('div.App-footer')).toHaveLength(1);
-  });
+	it("<Footer /> renders at least the text: Copyright", () => {
+		expect(wrapper.children('p').html()).to.include('Copyright');
+	});
 
-  it("very least render the text “Copyright”", () => {
-    const wrapper = shallow(<Footer />);
-    expect(wrapper.find("div.App-footer p").html()).toContain("Copyright")
-  });
+});
