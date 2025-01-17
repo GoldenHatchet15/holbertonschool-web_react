@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import Footer from './Footer';
 import { getFooterCopy, getCurrentYear } from '../utils/utils';
 

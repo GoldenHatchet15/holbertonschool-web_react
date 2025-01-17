@@ -1,36 +1,40 @@
 import React from 'react';
-import { render, act } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import Login from './Login';
 
 describe('Login component', () => {
   test('renders 2 labels, 2 inputs, and 1 button', () => {
-    const { getAllByTestId, getByText, getByLabelText } = render(<Login />);
-    
-    // Verify the labels
-    const emailLabel = getByLabelText(/email/i);
-    const passwordLabel = getByLabelText(/password/i);
-    expect(emailLabel).toBeInTheDocument();
-    expect(passwordLabel).toBeInTheDocument();
+    render(<Login />);
 
-    // Verify the inputs
-    const inputs = getAllByTestId('input-element');
-    expect(inputs).toHaveLength(2);
+    // Check labels
+    expect(screen.getByLabelText(/email/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/password/i)).toBeInTheDocument();
 
-    // Verify the button
-    const button = getByText('OK');
-    expect(button).toBeInTheDocument();
+    // Check inputs
+    expect(screen.getAllByTestId('input-element')).toHaveLength(2);
+
+    // Check button
+    expect(screen.getByText('OK')).toBeInTheDocument();
   });
 
   test('input gets focused when label is clicked', () => {
-    const { getByLabelText } = render(<Login />);
-    const emailLabel = getByLabelText(/email/i);
-    const emailInput = getByLabelText(/email/i);
+    render(<Login />);
+    const emailLabel = screen.getByLabelText(/email/i);
+    const emailInput = screen.getByLabelText(/email/i);
 
-    act(() => {
-      emailLabel.click(); // Simulate clicking the label
-    });
+    userEvent.click(emailLabel);
 
-    // Verify the input gains focus
+    // Verify input focus
+    expect(emailInput).toHaveFocus();
+  });
+
+  test('input gets focused when tabbed into', async () => {
+    render(<Login />);
+    const emailInput = screen.getByLabelText(/email/i);
+
+    // Simulate tabbing into the email input
+    await userEvent.tab();
     expect(emailInput).toHaveFocus();
   });
 });
