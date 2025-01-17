@@ -1,24 +1,36 @@
 import React from 'react';
-import { render } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { render, act } from '@testing-library/react';
 import Login from './Login';
 
-test('renders 2 labels, 2 inputs, and 1 button', () => {
-  const { getAllByTestId, getByText } = render(<Login />);
-  const inputs = getAllByTestId('input-element');
-  const button = getByText('OK');
+describe('Login component', () => {
+  test('renders 2 labels, 2 inputs, and 1 button', () => {
+    const { getAllByTestId, getByText, getByLabelText } = render(<Login />);
+    
+    // Verify the labels
+    const emailLabel = getByLabelText(/email/i);
+    const passwordLabel = getByLabelText(/password/i);
+    expect(emailLabel).toBeInTheDocument();
+    expect(passwordLabel).toBeInTheDocument();
 
-  expect(inputs).toHaveLength(2); // Check for 2 inputs
-  expect(button).toBeInTheDocument(); // Check for button
-});
+    // Verify the inputs
+    const inputs = getAllByTestId('input-element');
+    expect(inputs).toHaveLength(2);
 
-test('input gets focused when label is clicked', async () => {
-  const user = userEvent.setup(); // Create a user event simulation
-  const { getByLabelText } = render(<Login />);
-  const emailLabel = getByLabelText('Email:');
-  const emailInput = getByLabelText('Email:');
+    // Verify the button
+    const button = getByText('OK');
+    expect(button).toBeInTheDocument();
+  });
 
-  await user.click(emailLabel); // Simulate user clicking on the label
+  test('input gets focused when label is clicked', () => {
+    const { getByLabelText } = render(<Login />);
+    const emailLabel = getByLabelText(/email/i);
+    const emailInput = getByLabelText(/email/i);
 
-  expect(emailInput).toHaveFocus(); // Check if the input is focused
+    act(() => {
+      emailLabel.click(); // Simulate clicking the label
+    });
+
+    // Verify the input gains focus
+    expect(emailInput).toHaveFocus();
+  });
 });

@@ -3,45 +3,37 @@ import { render, screen } from '@testing-library/react';
 import App from './App';
 
 describe('App component', () => {
-    beforeEach(() => {
-        document.body.innerHTML = '';  // Clear the body to ensure no leftover markup from previous tests
-        render(<App />);
-    });
+  beforeEach(() => {
+    render(<App />);
+  });
 
-    test('renders the h1 element with the text "School Dashboard"', () => {
-        const headingElement = screen.getByRole('heading', { name: /school dashboard/i });
-        expect(headingElement).toBeInTheDocument();
-    });
+  test('renders the Header component with the Holberton logo and heading', () => {
+    // Check for the Holberton logo
+    const logo = screen.getByAltText(/holberton logo/i);
+    expect(logo).toBeInTheDocument();
 
-    test('checks text content in app-body and app-footer', () => {
-        const bodyText = screen.getByText(/login to access the full dashboard/i);
-        expect(bodyText).toBeInTheDocument();
+    // Check for the h1 element with the text "School dashboard"
+    const heading = screen.getByRole('heading', { name: /school dashboard/i });
+    expect(heading).toBeInTheDocument();
+  });
 
-        // Simplified check for the footer text, focusing on part of the text
-        const footerText = screen.getByText(/copyright/i);
-        expect(footerText).toBeInTheDocument();
-    });
+  test('renders the Login component', () => {
+    // Check for the text in the Login component
+    const loginText = screen.getByText(/login to access the full dashboard/i);
+    expect(loginText).toBeInTheDocument();
 
-    test('checks if an img element with alt text "holberton logo" is rendered', () => {
-        const imgElement = screen.getByAltText(/holberton logo/i);
-        expect(imgElement).toBeInTheDocument();
-    });
+    // Check for two input elements in the Login component
+    const inputs = screen.getAllByTestId('input-element');
+    expect(inputs).toHaveLength(2);
 
-    test('renders two input elements', () => {
-        const inputElements = screen.getAllByTestId('input-element');
-        expect(inputElements.length).toBe(2);
-    });
+    // Check for the button in the Login component
+    const button = screen.getByRole('button', { name: /ok/i });
+    expect(button).toBeInTheDocument();
+  });
 
-    test('renders two label elements with the text "Email" and "Password"', () => {
-        const emailLabel = screen.getByLabelText(/email/i);
-        const passwordLabel = screen.getByLabelText(/password/i);
-        expect(emailLabel).toBeInTheDocument();
-        expect(passwordLabel).toBeInTheDocument();
-    });
-
-    test('renders a button with the text "OK"', () => {
-        const buttonElement = screen.getByRole('button', { name: /ok/i });
-        expect(buttonElement).toBeInTheDocument();
-    });
+  test('renders the Footer component with correct text', () => {
+    // Check for the Footer component text
+    const footerText = screen.getByText(/copyright/i);
+    expect(footerText).toBeInTheDocument();
+  });
 });
-
