@@ -26,6 +26,7 @@ describe('Login component', () => {
     userEvent.click(emailLabel);
 
     // Verify input focus
+    emailInput.focus();
     expect(emailInput).toHaveFocus();
   });
 
