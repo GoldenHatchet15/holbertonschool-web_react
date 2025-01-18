@@ -1,54 +1,40 @@
 import React from 'react';
-import './Notifications.css';
-import closeIcon from '../assets/close-icon.png';
-import { getLatestNotification } from '../utils/utils';
+import PropTypes from 'prop-types';
 import NotificationItem from './NotificationItem';
 
-function Notifications() {
-	return (
-		<div className="Notifications">
-			<button
-				style={{
-					color: '#3a3a3a',
-					fontWeight: 'bold',
-					background: 'none',
-					border: 'none',
-					fontSize: '15px',
-					position: 'absolute',
-					right: '3px',
-					top: '3px',
-					cursor: 'pointer',
-					outline: 'none',
-				}}
-				aria-label="Close"
-				onClick={(e) => {
-					console.log('Close button has been clicked');
-				}}
-			>
-				<img
-					src={closeIcon}
-					alt="close icon"
-				/>
-			</button>
-			<p>
-				Here is the list of notifications
-			</p>
-			<ul>
-				<NotificationItem
-					type="default"
-					value="New course available"
-				/>
-				<NotificationItem
-					type="urgent"
-					value="New resume available"
-				/>
-				<NotificationItem
-					type="urgent"
-					html={{__html: getLatestNotification()}}
-				/>
-			</ul>
-		</div>
-	);
+function Notifications({ notifications }) {
+  return (
+    <div className="Notifications">
+      <p>Here is the list of notifications</p>
+      <ul>
+        {notifications.map((notif) => (
+          <NotificationItem
+            key={notif.id}
+            type={notif.type}
+            value={notif.value}
+            html={notif.html}
+          />
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+Notifications.propTypes = {
+  notifications: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      type: PropTypes.string.isRequired,
+      value: PropTypes.string,
+      html: PropTypes.shape({
+        __html: PropTypes.string,
+      }),
+    })
+  ),
+};
+
+Notifications.defaultProps = {
+  notifications: [],
 };
 
 export default Notifications;

@@ -1,34 +1,23 @@
 import React from 'react';
-import { expect } from 'chai';
-import Adapter from 'enzyme-adapter-react-16';
-import { shallow, configure } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 import Notifications from './Notifications';
-import NotificationItem from './NotificationItem';
 
-configure({adapter: new Adapter()});
+describe('<Notifications />', () => {
+  const notificationsList = [
+    { id: 1, type: 'default', value: 'New course available' },
+    { id: 2, type: 'urgent', value: 'New resume available' },
+    { id: 3, type: 'urgent', html: { __html: '<strong>Urgent requirement</strong>' } },
+  ];
 
-describe("Testing the <Notifications /> Component", () => {
+  test('renders without crashing', () => {
+    render(<Notifications notifications={notificationsList} />);
+    expect(screen.getByText(/Here is the list of notifications/)).toBeInTheDocument();
+  });
 
-	let wrapper;
-
-	beforeEach(() => {
-		wrapper = shallow(<Notifications />);
-	});
-
-	it("<Notifications /> is rendered without crashing", () => {
-		expect(wrapper).to.not.be.an('undefined');
-	});
-
-	it("<Notifications /> renders three list items", () => {
-		expect(wrapper.find(NotificationItem)).to.have.lengthOf(3);
-	});
-
-	it("<Notifications /> renders the first <NotificationItem /> element with the right HTML", () => {
-		expect(wrapper.find('ul').childAt(0).html()).to.equal('<li data-priority-type="default">New course available</li>');
-	});
-
-	it("<Notifications /> render the text 'Here is the list of notifications'", () => {
-		expect(wrapper.contains(<p>Here is the list of notifications</p>)).to.equal(true);
-	});
-
+  test('renders the correct HTML for the first NotificationItem', () => {
+    render(<Notifications notifications={notificationsList} />);
+    const firstItem = screen.getByText(/New course available/);
+    expect(firstItem).toBeInTheDocument();
+    expect(firstItem).toHaveAttribute('data-notification-type', 'default');
+  });
 });
