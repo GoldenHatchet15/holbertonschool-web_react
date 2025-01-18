@@ -1,48 +1,32 @@
-.Notifications {
-  position: relative;
-  border: 1px dashed red;
-  padding: 10px;
-  /*margin: 10px auto;*/ /* Center horizontally */
-  background-color: white;
-  /*width: 100%;*/
-}
-
-.Notifications p{
-  color: black;
-  margin-top: 0;
+.notifications-title {
+  font-size: 16px;
+  font-weight: bold;
   margin-bottom: 10px;
 }
 
-.close-button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-.close-button img {
-  width: 15px;
-  height: 15px;
+.Notifications {
+  border: 1px solid #e1484c;
+  padding: 20px;
+  background-color: #fff8f8;
+  position: relative;
 }
 
 .Notifications ul {
-  list-style: disc;
-  padding: 40px;
+  list-style: none;
+  padding: 0;
 }
 
-.item {
-  padding: 2px 0; /* Add padding for spacing */
+.Notifications li {
+  margin: 5px 0;
 }
 
-.default-priority {
-  display: list-item;
-  color: blue;
+.Notifications button {
+  font-size: 16px;
+  font-weight: bold;
+  color: #e1484c;
+  cursor: pointer;
 }
 
-.urgent-priority {
-  display: list-item;
-  color: red;
+.Notifications p {
+  margin-bottom: 10px;
 }
-
