@@ -1,25 +1,17 @@
-:root {
-  --holberton-red: #e1484c;
-}
-
-body {
-  max-width: 90%;
-  margin: 0 auto;
-}
-
-div {
-  padding: 2px 8px;
-}
-
+/* General App styling */
 .App {
-  position: relative;
+  text-align: left;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Ensures footer sticks to bottom */
+  font-family: Arial, sans-serif; /* or any other font you prefer */
+  color: #e1003c;
 }
 
-.upperside {
-  display: flex;
-  flex-direction: row-reverse;
-  width: 100%;
-  border-bottom: 3px solid var(--holberton-red);
-  justify-content: space-between;
-}
+/* Header styling */
+
+
+/* Body styling */
+
+/* Footer styling */

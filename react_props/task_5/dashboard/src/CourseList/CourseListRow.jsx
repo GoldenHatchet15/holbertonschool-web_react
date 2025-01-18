@@ -44,13 +44,10 @@ class CourseListRow extends Component {
 	}
 };
 
-CourseListRow.propTypes = {
+CourseListRow.protoTypes = {
 	isHeader: PropTypes.bool,
 	textFirstCell: PropTypes.string.isRequired,
-	textSecondCell: PropTypes.oneOfType([
-		PropTypes.string,
-		PropTypes.number,
-	]),
+	textSecondCell: PropTypes.string,
 };
 
 CourseListRow.defaultProps = {

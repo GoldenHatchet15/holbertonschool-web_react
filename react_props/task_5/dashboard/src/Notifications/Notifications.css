@@ -1,19 +1,32 @@
+.notifications-title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
 .Notifications {
-	border: 2px dotted var(--holberton-red);
-	padding: 6px 12px;
-	position: relative;
-	margin-top: 12px;
+  border: 1px solid #e1484c;
+  padding: 20px;
+  background-color: #fff8f8;
+  position: relative;
 }
 
-.menuItem {
-	text-align: right;
-	font-weight: bold;
+.Notifications ul {
+  list-style: none;
+  padding: 0;
 }
 
-li[data-priority-type="default"] {
-	color: blue;
+.Notifications li {
+  margin: 5px 0;
 }
 
-li[data-priority-type="urgent"] {
-	color: red;
+.Notifications button {
+  font-size: 16px;
+  font-weight: bold;
+  color: #e1484c;
+  cursor: pointer;
+}
+
+.Notifications p {
+  margin-bottom: 10px;
 }
