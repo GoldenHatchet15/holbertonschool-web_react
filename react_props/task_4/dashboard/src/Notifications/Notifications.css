@@ -1,19 +1,48 @@
 .Notifications {
-	border: 2px dotted var(--holberton-red);
-	padding: 6px 12px;
-	position: relative;
-	margin-top: 12px;
+  position: relative;
+  border: 1px dashed red;
+  padding: 10px;
+  /*margin: 10px auto;*/ /* Center horizontally */
+  background-color: white;
+  /*width: 100%;*/
 }
 
-.menuItem {
-	text-align: right;
-	font-weight: bold;
+.Notifications p{
+  color: black;
+  margin-top: 0;
+  margin-bottom: 10px;
 }
 
-li[data-priority-type="default"] {
-	color: blue;
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
-li[data-priority-type="urgent"] {
-	color: red;
+.close-button img {
+  width: 15px;
+  height: 15px;
 }
+
+.Notifications ul {
+  list-style: disc;
+  padding: 40px;
+}
+
+.item {
+  padding: 2px 0; /* Add padding for spacing */
+}
+
+.default-priority {
+  display: list-item;
+  color: blue;
+}
+
+.urgent-priority {
+  display: list-item;
+  color: red;
+}
+
