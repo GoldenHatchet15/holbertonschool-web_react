@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Login from '../Login/Login';
@@ -17,10 +18,6 @@ class App extends Component {
 
     this.handleKeyDown = this.handleKeyDown.bind(this);
   }
-
-  static defaultProps = {
-    logOut: () => {},
-  };
 
   componentDidMount() {
     window.addEventListener('keydown', this.handleKeyDown);
@@ -50,5 +47,15 @@ class App extends Component {
     );
   }
 }
+
+// Prop validation
+App.propTypes = {
+  logOut: PropTypes.func, // Validate that logOut is a function
+};
+
+// Default props
+App.defaultProps = {
+  logOut: () => {}, // Default value if logOut is not passed
+};
 
 export default App;

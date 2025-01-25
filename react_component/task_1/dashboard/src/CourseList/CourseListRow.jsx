@@ -1,58 +1,39 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-class CourseListRow extends Component {
-	render() {
-
-		let {
-			isHeader,
-			textFirstCell,
-			textSecondCell,
-		} = this.props;
-
-		if (isHeader === true && textSecondCell == null) {
-			return (
-				<tr>
-					<th colSpan={2}>
-						{textFirstCell}
-					</th>
-				</tr>
-			);
-		} else if (isHeader === true && textSecondCell != null) {
-			return (
-				<tr>
-					<th>
-						{textFirstCell}
-					</th>
-					<th>
-						{textSecondCell}
-					</th>
-				</tr>
-			);
-		} else if (isHeader === false) {
-			return (
-				<tr>
-					<td>
-						{textFirstCell}
-					</td>
-					<td>
-						{textSecondCell}
-					</td>
-				</tr>
-			);
-		}
-	}
+const CourseListRow = ({ isHeader, textFirstCell, textSecondCell }) => {
+  if (isHeader) {
+    return (
+      <tr>
+        {textSecondCell === null ? (
+          <th colSpan="2">{textFirstCell}</th>
+        ) : (
+          <>
+            <th>{textFirstCell}</th>
+            <th>{textSecondCell}</th>
+          </>
+        )}
+      </tr>
+    );
+  }
+  return (
+    <tr>
+      <td>{textFirstCell}</td>
+      <td>{textSecondCell}</td>
+    </tr>
+  );
 };
 
-CourseListRow.protoTypes = {
-	isHeader: PropTypes.bool,
-	textFirstCell: PropTypes.string.isRequired,
-	textSecondCell: PropTypes.string,
+// Prop validation
+CourseListRow.propTypes = {
+  isHeader: PropTypes.bool.isRequired, // `isHeader` is a required boolean
+  textFirstCell: PropTypes.string.isRequired, // `textFirstCell` is a required string
+  textSecondCell: PropTypes.string, // `textSecondCell` is an optional string
 };
 
+// Default props
 CourseListRow.defaultProps = {
-	isHeader: false,
-	textSecondCell: null,
+  textSecondCell: null, // Default value if not passed
 };
 
 export default CourseListRow;
