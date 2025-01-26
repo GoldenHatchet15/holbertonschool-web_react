@@ -4,6 +4,9 @@ import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Login from '../Login/Login';
 import Notifications from '../Notifications/Notifications';
+import CourseList from '../CourseList/CourseList';
+import BodySectionWithMarginBottom from '../BodySection/BodySectionWithMarginBottom';
+import BodySection from '../BodySection/BodySection';
 
 class App extends Component {
   constructor(props) {
@@ -15,47 +18,42 @@ class App extends Component {
         { id: 3, type: 'urgent', value: 'Your session will expire soon' },
       ],
     };
-
-    this.handleKeyDown = this.handleKeyDown.bind(this);
-  }
-
-  componentDidMount() {
-    window.addEventListener('keydown', this.handleKeyDown);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('keydown', this.handleKeyDown);
-  }
-
-  handleKeyDown(event) {
-    if (event.ctrlKey && event.key === 'h') {
-      alert('Logging you out');
-      this.props.logOut();
-    }
   }
 
   render() {
+    const { isLoggedIn } = this.props;
     const { notificationsData } = this.state;
 
     return (
       <Fragment>
         <Notifications notifications={notificationsData} />
         <Header />
-        <Login />
+        <div className="App-body">
+          {isLoggedIn ? (
+            <BodySectionWithMarginBottom title="Course list">
+              <CourseList />
+            </BodySectionWithMarginBottom>
+          ) : (
+            <BodySectionWithMarginBottom title="Log in to continue">
+              <Login />
+            </BodySectionWithMarginBottom>
+          )}
+          <BodySection title="News from the School">
+            <p>Holberton School News goes here</p>
+          </BodySection>
+        </div>
         <Footer />
       </Fragment>
     );
   }
 }
 
-// Prop validation
 App.propTypes = {
-  logOut: PropTypes.func, // Validate that logOut is a function
+  isLoggedIn: PropTypes.bool,
 };
 
-// Default props
 App.defaultProps = {
-  logOut: () => {}, // Default value if logOut is not passed
+  isLoggedIn: false,
 };
 
 export default App;

@@ -1,29 +1,23 @@
 import React from 'react';
-import { render, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import App from './App';
 
-describe('App component', () => {
-  let logOutMock;
-
-  beforeEach(() => {
-    logOutMock = jest.fn();
-    jest.spyOn(window, 'alert').mockImplementation(() => {}); // Mock alert
-    render(<App logOut={logOutMock} />);
+describe('<App />', () => {
+  test('displays Course list title above CourseList component when isLoggedIn is true', () => {
+    render(<App isLoggedIn={true} />);
+    expect(screen.getByRole('heading', { name: /Course list/i })).toBeInTheDocument();
+    expect(screen.getByText(/Available courses/i)).toBeInTheDocument();
   });
 
-  afterEach(() => {
-    jest.restoreAllMocks(); // Restore mocks after each test
+  test('displays Log in to continue title above Login component when isLoggedIn is false', () => {
+    render(<App isLoggedIn={false} />);
+    expect(screen.getByRole('heading', { name: /Log in to continue/i })).toBeInTheDocument();
+    expect(screen.getByText(/Login to access the full dashboard/i)).toBeInTheDocument();
   });
 
-  test('calls logOut when Ctrl+H is pressed', () => {
-    fireEvent.keyDown(window, { ctrlKey: true, key: 'h' });
-
-    expect(logOutMock).toHaveBeenCalledTimes(1);
-  });
-
-  test('shows alert with "Logging you out" when Ctrl+H is pressed', () => {
-    fireEvent.keyDown(window, { ctrlKey: true, key: 'h' });
-
-    expect(window.alert).toHaveBeenCalledWith('Logging you out');
+  test('displays News from the School title and paragraph by default', () => {
+    render(<App />);
+    expect(screen.getByRole('heading', { name: /News from the School/i })).toBeInTheDocument();
+    expect(screen.getByText(/Holberton School News goes here/i)).toBeInTheDocument();
   });
 });
