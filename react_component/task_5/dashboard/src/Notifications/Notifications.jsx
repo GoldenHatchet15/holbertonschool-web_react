@@ -4,17 +4,12 @@ import './Notifications.css';
 import NotificationItem from './NotificationItem';
 
 class Notifications extends Component {
-  constructor(props) {
-    super(props);
-    this.markAsRead = this.markAsRead.bind(this);
-  }
-
-  markAsRead(id) {
-    console.log(`Notification ${id} has been marked as read`);
+  shouldComponentUpdate(nextProps) {
+    return nextProps.notifications.length !== this.props.notifications.length;
   }
 
   render() {
-    const { displayDrawer, notifications } = this.props;
+    const { displayDrawer, notifications, markAsRead } = this.props;
 
     return (
       <div>
@@ -49,7 +44,8 @@ class Notifications extends Component {
                     id={notif.id}
                     type={notif.type}
                     value={notif.value}
-                    markAsRead={this.markAsRead}
+                    html={notif.html}
+                    markAsRead={markAsRead}
                   />
                 ))}
               </ul>
@@ -68,13 +64,18 @@ Notifications.propTypes = {
       id: PropTypes.number.isRequired,
       type: PropTypes.string.isRequired,
       value: PropTypes.string,
+      html: PropTypes.shape({
+        __html: PropTypes.string.isRequired,
+      }),
     })
   ),
+  markAsRead: PropTypes.func,
 };
 
 Notifications.defaultProps = {
   displayDrawer: false,
   notifications: [],
+  markAsRead: () => {},
 };
 
 export default Notifications;
