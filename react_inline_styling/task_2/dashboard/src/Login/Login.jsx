@@ -34,4 +34,7 @@ const Login = () => (
   </div>
 );
 
-export default WithLogging(Login);
+// Assign a name to the wrapped component
+const LoginWithLogging = WithLogging(Login);
+
+export default LoginWithLogging;

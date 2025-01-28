@@ -30,4 +30,7 @@ class CourseList extends Component {
   }
 }
 
-export default WithLogging(CourseList);
+// Assign a name to the wrapped component
+const CourseListWithLogging = WithLogging(CourseList);
+
+export default CourseListWithLogging;
