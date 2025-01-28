@@ -3,7 +3,6 @@ import { render, screen } from '@testing-library/react';
 import BodySectionWithMarginBottom from './BodySectionWithMarginBottom';
 import { StyleSheetTestUtils } from 'aphrodite';
 
-
 beforeAll(() => {
   StyleSheetTestUtils.suppressStyleInjection();
 });
@@ -14,13 +13,24 @@ afterAll(() => {
 
 describe('<BodySectionWithMarginBottom />', () => {
   test('contains a div with the class bodySectionWithMargin', () => {
-    render(<BodySectionWithMarginBottom title="Test Title"><p>Test content</p></BodySectionWithMarginBottom>);
-    const wrapperDiv = screen.getByText('Test content').closest('div.bodySectionWithMargin');
-    expect(wrapperDiv).toHaveClass('bodySectionWithMargin');
+    const { container } = render(
+      <BodySectionWithMarginBottom title="Test Title">
+        <p>Test content</p>
+      </BodySectionWithMarginBottom>
+    );
+
+    // Find the div with the dynamically generated class name
+    const wrapperDiv = container.querySelector('div');
+    expect(wrapperDiv.className).toMatch(/bodySectionWithMargin/); // Regex to match the dynamic class name
   });
 
   test('renders the BodySection component', () => {
-    render(<BodySectionWithMarginBottom title="Test Title"><p>Test content</p></BodySectionWithMarginBottom>);
+    render(
+      <BodySectionWithMarginBottom title="Test Title">
+        <p>Test content</p>
+      </BodySectionWithMarginBottom>
+    );
+
     const heading = screen.getByRole('heading', { name: 'Test Title' });
     expect(heading).toBeInTheDocument();
   });

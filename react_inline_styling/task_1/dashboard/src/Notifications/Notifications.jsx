@@ -14,6 +14,15 @@ const styles = StyleSheet.create({
     borderRadius: '5px',
     boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)',
   },
+  closeButton: {
+    position: 'absolute',
+    right: '10px',
+    top: '10px',
+    background: 'none',
+    border: 'none',
+    cursor: 'pointer',
+    fontSize: '1rem',
+  },
 });
 
 class Notifications extends Component {
@@ -30,14 +39,9 @@ class Notifications extends Component {
         {displayDrawer && (
           <div className={css(styles.notifications)}>
             <button
-              style={{
-                position: 'absolute',
-                right: '10px',
-                top: '10px',
-                background: 'none',
-                border: 'none',
-              }}
+              className={css(styles.closeButton)}
               aria-label="Close"
+              onClick={() => console.log('Close button clicked')}
             >
               X
             </button>
@@ -48,7 +52,7 @@ class Notifications extends Component {
                   key={notif.id}
                   type={notif.type}
                   value={notif.value}
-                  markAsRead={markAsRead} // Pass markAsRead here
+                  markAsRead={() => this.markAsRead(notif.id)} // Bind this correctly
                   id={notif.id} // Ensure id is passed
                 />
               ))}

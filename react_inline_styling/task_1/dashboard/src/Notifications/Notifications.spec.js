@@ -3,7 +3,6 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import Notifications from './Notifications';
 import { StyleSheetTestUtils } from 'aphrodite';
 
-
 beforeAll(() => {
   StyleSheetTestUtils.suppressStyleInjection();
 });
@@ -25,13 +24,12 @@ describe('Notifications Component', () => {
 
   test('logs "Notification {id} has been marked as read" when a notification is clicked', () => {
     const consoleLogSpy = jest.spyOn(console, 'log');
-    const mockMarkAsRead = jest.fn((id) => console.log(`Notification ${id} has been marked as read`));
-    render(<Notifications displayDrawer={true} notifications={notifications} markAsRead={mockMarkAsRead} />);
+
+    render(<Notifications displayDrawer={true} notifications={notifications} />);
 
     const item = screen.getByText('New course available');
-    fireEvent.click(item);
+    fireEvent.click(item); // Simulate the click event on the notification item
 
-    expect(mockMarkAsRead).toHaveBeenCalledWith(1);
     expect(consoleLogSpy).toHaveBeenCalledWith('Notification 1 has been marked as read');
 
     consoleLogSpy.mockRestore();
