@@ -1,14 +1,26 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import CourseListRow from './CourseListRow';
+import { StyleSheet, css } from 'aphrodite';
 import { StyleSheetTestUtils } from 'aphrodite';
 
+// Suppress Aphrodite style injection during testing
 beforeAll(() => {
   StyleSheetTestUtils.suppressStyleInjection();
 });
 
 afterAll(() => {
   StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+});
+
+// Test-specific styles
+const styles = StyleSheet.create({
+  headerRow: {
+    backgroundColor: '#deb5b545',
+  },
+  defaultRow: {
+    backgroundColor: '#f5f5f5ab',
+  },
 });
 
 describe('<CourseListRow />', () => {
@@ -36,7 +48,7 @@ describe('<CourseListRow />', () => {
     );
 
     const row = screen.getByRole('row');
-    expect(row).toHaveClass(css({ backgroundColor: '#deb5b545' }));
+    expect(row).toHaveClass(css(styles.headerRow)); // Validate header row style
   });
 
   it('applies correct styles for default rows', () => {
@@ -49,6 +61,6 @@ describe('<CourseListRow />', () => {
     );
 
     const row = screen.getByRole('row');
-    expect(row).toHaveClass(css({ backgroundColor: '#f5f5f5ab' }));
+    expect(row).toHaveClass(css(styles.defaultRow)); // Validate default row style
   });
 });

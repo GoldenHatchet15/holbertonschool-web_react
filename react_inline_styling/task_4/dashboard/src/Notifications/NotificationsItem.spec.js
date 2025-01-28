@@ -1,14 +1,26 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import NotificationItem from './NotificationItem';
+import { StyleSheet, css } from 'aphrodite';
 import { StyleSheetTestUtils } from 'aphrodite';
 
+// Suppress Aphrodite style injection during testing
 beforeAll(() => {
   StyleSheetTestUtils.suppressStyleInjection();
 });
 
 afterAll(() => {
   StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+});
+
+// Test-specific styles
+const styles = StyleSheet.create({
+  default: {
+    color: 'blue',
+  },
+  urgent: {
+    color: 'red',
+  },
 });
 
 describe('<NotificationItem />', () => {
@@ -24,13 +36,13 @@ describe('<NotificationItem />', () => {
       <NotificationItem type="default" value="Default notification" id={1} markAsRead={() => {}} />
     );
     const defaultItem = screen.getByText('Default notification');
-    expect(defaultItem).toHaveClass(css({ color: 'blue' }));
+    expect(defaultItem).toHaveClass(css(styles.default)); // Validate default style
 
     rerender(
       <NotificationItem type="urgent" value="Urgent notification" id={2} markAsRead={() => {}} />
     );
     const urgentItem = screen.getByText('Urgent notification');
-    expect(urgentItem).toHaveClass(css({ color: 'red' }));
+    expect(urgentItem).toHaveClass(css(styles.urgent)); // Validate urgent style
   });
 
   test('calls markAsRead with the correct id when clicked', () => {
