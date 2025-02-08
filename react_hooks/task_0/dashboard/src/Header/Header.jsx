@@ -28,7 +28,11 @@ const styles = StyleSheet.create({
 });
 
 const Header = () => {
+  // ✅ useContext MUST be inside the function component
   const { user, logOut } = useContext(AppContext);
+
+  console.log('User context:', user); // ✅ Now inside function
+  console.log('Logout function:', logOut);
 
   return (
     <header className={css(styles.header)}>
