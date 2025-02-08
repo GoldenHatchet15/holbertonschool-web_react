@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { StyleSheet, css } from 'aphrodite';
 import WithLogging from '../HOC/WithLogging';
+import PropTypes from 'prop-types';
+
 
 const styles = StyleSheet.create({
   login: {
@@ -111,6 +113,10 @@ class Login extends Component {
     );
   }
 }
+
+Login.propTypes = {
+  logIn: PropTypes.func.isRequired,
+};
 
 const LoginWithLogging = WithLogging(Login);
 export default LoginWithLogging;

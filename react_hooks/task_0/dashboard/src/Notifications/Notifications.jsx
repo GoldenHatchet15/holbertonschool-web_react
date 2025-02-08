@@ -76,6 +76,8 @@ Notifications.propTypes = {
   displayDrawer: PropTypes.bool,
   notifications: PropTypes.arrayOf(PropTypes.object),
   markNotificationAsRead: PropTypes.func.isRequired,
+  handleDisplayDrawer: PropTypes.func.isRequired,
+  handleHideDrawer: PropTypes.func.isRequired,
 };
 
 Notifications.defaultProps = {
